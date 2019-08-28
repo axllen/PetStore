@@ -1,5 +1,7 @@
 import wx
 
+from dao.account_dao import AccountDao
+
 
 class LoginFrame(wx.Frame):
     def __init__(self):
@@ -12,14 +14,14 @@ class LoginFrame(wx.Frame):
         # 用户名密码输入界面
         user_text = wx.StaticText(self.panel, label='用户名：')
         password_text = wx.StaticText(self.panel, label='密码：')
-        user_tc = wx.TextCtrl(self.panel)
-        password_tc = wx.TextCtrl(self.panel, style=wx.TE_PASSWORD)
+        self.user_tc = wx.TextCtrl(self.panel)
+        self.password_tc = wx.TextCtrl(self.panel, style=wx.TE_PASSWORD)
         login_grid = wx.FlexGridSizer(2, 2, 2)
         login_grid.AddMany([
             user_text,
-            (user_tc, 1, wx.EXPAND),
+            (self.user_tc, 1, wx.EXPAND),
             password_text,
-            (password_tc, 1, wx.EXPAND)
+            (self.password_tc, 1, wx.EXPAND)
         ])
         login_grid.AddGrowableCol(0, 1)
         login_grid.AddGrowableCol(1, 4)
@@ -43,7 +45,9 @@ class LoginFrame(wx.Frame):
         self.panel.SetSizer(vertical_box)
 
     def submit_button_onclick(self, event):
-        pass
+        dao = AccountDao()
+        input_userid = self.user_tc.GetValue()
+
 
     def cancel_button_onclick(self, event):
         self.Destroy()

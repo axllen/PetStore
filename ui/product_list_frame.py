@@ -7,3 +7,4 @@ class ProductListFrame(wx.Frame):
         self.Center()
         self.panel = wx.Panel(self)
 
+        # 商品列表

@@ -1,0 +1,2 @@
+class ProductDao():
+    pass
