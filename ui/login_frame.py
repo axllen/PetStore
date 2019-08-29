@@ -1,6 +1,7 @@
 import wx
 
 from dao.account_dao import AccountDao
+from ui.product_list_frame import ProductListFrame
 
 
 class LoginFrame(wx.Frame):
@@ -46,8 +47,18 @@ class LoginFrame(wx.Frame):
 
     def submit_button_onclick(self, event):
         dao = AccountDao()
-        input_userid = self.user_tc.GetValue()
-
+        account = dao.find_by_id(self.user_tc.GetValue())
+        input_password = self.password_tc.GetValue()
+        if account and account['password'] == input_password:
+            print('登录成功')
+            next_frame = ProductListFrame()
+            next_frame.Show()
+            self.Destroy()
+        else:
+            print('登录失败')
+            dialog = wx.MessageDialog(self, '用户名或密码错误', '登录失败')
+            dialog.ShowModal()
+            dialog.Destroy()
 
     def cancel_button_onclick(self, event):
         self.Destroy()

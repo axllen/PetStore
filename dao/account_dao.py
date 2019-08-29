@@ -14,7 +14,7 @@ class AccountDao(BaseDao):
                 row = cursor.fetchone()
 
                 if row:
-                    account = {}
+                    account = dict()
                     account['userid'] = row[0]
                     account['password'] = row[1]
 
